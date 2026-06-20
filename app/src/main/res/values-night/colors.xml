@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="accent">#FFE8896B</color>
+    <color name="bar_track">#33FFFFFF</color>
+    <color name="stale">#FFFFC233</color>
+</resources>

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Claude Usage</string>
+    <string name="sign_in">Sign in to Claude</string>
+    <string name="widget_description">Claude usage (5H / 1W) on your home screen</string>
+</resources>
