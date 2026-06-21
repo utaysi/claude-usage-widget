@@ -8,3 +8,8 @@
 .externalNativeBuild
 .cxx
 app/build/
+
+# Release signing (never commit these)
+/.signing/
+*.keystore
+*.jks
