@@ -11,12 +11,7 @@ Keeps your `5H` and `1W` percentages (plus *“resets in”* countdowns) live on
 
 <br />
 
-<table>
-  <tr>
-    <td align="center" valign="middle"><img src="docs/widget-focus.png" alt="Claude Usage widget close-up" width="380" /></td>
-    <td align="center" valign="middle"><img src="docs/home-screen.png" alt="The widget on an Android home screen" width="210" /></td>
-  </tr>
-</table>
+<img src="docs/promo.png" alt="Claude Usage widget on an Android home screen, with a close-up of the 5H and 1W usage bars" width="720" />
 
 <br />
 
