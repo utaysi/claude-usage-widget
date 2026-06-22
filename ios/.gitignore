@@ -1,0 +1,8 @@
+# Xcode / SwiftPM build artifacts
+DerivedData/
+*.xcodeproj
+.build/
+.swiftpm/
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
