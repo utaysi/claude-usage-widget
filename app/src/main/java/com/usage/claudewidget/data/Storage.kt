@@ -63,12 +63,15 @@ class Storage private constructor(
         get() = AuthState.entries.getOrElse(snapshot.getInt("auth_state", 0)) { AuthState.OK }
         set(v) = snapshot.edit().putInt("auth_state", v.ordinal).apply()
 
-    val hasSnapshot: Boolean get() = fiveHourUtil >= 0f
+    val hasSnapshot: Boolean get() = fetchedAt > 0L
+
+    /** False when the last snapshot had no 5-hour window (fh_util stays at its -1 default). */
+    val hasFiveHour: Boolean get() = fiveHourUtil >= 0f
 
     fun saveSnapshot(s: UsageSnapshot) {
         snapshot.edit()
-            .putFloat("fh_util", s.fiveHour.utilization)
-            .putLong("fh_reset", s.fiveHour.resetsAtEpochMs)
+            .putFloat("fh_util", s.fiveHour?.utilization ?: -1f)
+            .putLong("fh_reset", s.fiveHour?.resetsAtEpochMs ?: 0L)
             .putFloat("wk_util", s.sevenDay.utilization)
             .putLong("wk_reset", s.sevenDay.resetsAtEpochMs)
             .putLong("fetched_at", s.fetchedAtEpochMs)

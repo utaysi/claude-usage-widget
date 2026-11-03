@@ -37,7 +37,7 @@ import com.usage.claudewidget.ui.MainActivity
 data class WidgetState(
     val needsLogin: Boolean,
     val hasData: Boolean,
-    val fiveHourPct: Int,
+    val fiveHourPct: Int?,       // null hides the 5H row
     val fiveHourResets: String,
     val sevenDayPct: Int,
     val sevenDayResets: String,
@@ -95,8 +95,10 @@ private fun FullLayout(s: WidgetState) {
             )
         }
         Spacer(GlanceModifier.height(10.dp))
-        MeterRow("5H", s.fiveHourPct, s.fiveHourResets)
-        Spacer(GlanceModifier.height(10.dp))
+        s.fiveHourPct?.let {
+            MeterRow("5H", it, s.fiveHourResets)
+            Spacer(GlanceModifier.height(10.dp))
+        }
         MeterRow("1W", s.sevenDayPct, s.sevenDayResets)
     }
 }
@@ -133,8 +135,10 @@ private fun CompactLayout(s: WidgetState) {
     Column(modifier = GlanceModifier.fillMaxSize()) {
         Lobster(16.dp)
         Spacer(GlanceModifier.height(6.dp))
-        CompactMeter("5H", s.fiveHourPct)
-        Spacer(GlanceModifier.height(6.dp))
+        s.fiveHourPct?.let {
+            CompactMeter("5H", it)
+            Spacer(GlanceModifier.height(6.dp))
+        }
         CompactMeter("1W", s.sevenDayPct)
     }
 }

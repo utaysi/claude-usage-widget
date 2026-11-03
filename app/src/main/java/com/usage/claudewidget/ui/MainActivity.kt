@@ -79,7 +79,7 @@ private fun SetupScreen() {
                 debug = when (val r = UsageRepository(context).refresh()) {
                     is FetchResult.Success -> {
                         UsageWidget.updateAll(context)
-                        "5H: ${r.snapshot.fiveHour.utilization}%   " +
+                        (r.snapshot.fiveHour?.let { "5H: ${it.utilization}%   " } ?: "") +
                             "1W: ${r.snapshot.sevenDay.utilization}%"
                     }
                     is FetchResult.NeedsLogin -> "Session expired. Sign in again."
@@ -103,8 +103,9 @@ private fun describe(s: Storage): String = buildString {
     append(if (s.isLoggedIn) "Signed in ✓" else "Not signed in")
     append("\norg: ").append(s.orgId ?: "-")
     if (s.hasSnapshot) {
-        append("\nlast: 5H ").append(s.fiveHourUtil.toInt()).append("%  1W ")
-            .append(s.sevenDayUtil.toInt()).append("%")
+        append("\nlast: ")
+        if (s.hasFiveHour) append("5H ").append(s.fiveHourUtil.toInt()).append("%  ")
+        append("1W ").append(s.sevenDayUtil.toInt()).append("%")
     }
 }
 
