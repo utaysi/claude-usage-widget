@@ -37,7 +37,7 @@ class UsageWidget : GlanceAppWidget() {
         return WidgetState(
             needsLogin = !s.isLoggedIn || s.authState == AuthState.NEEDS_LOGIN,
             hasData = s.hasSnapshot,
-            fiveHourPct = s.fiveHourUtil.coerceAtLeast(0f).roundToInt(),
+            fiveHourPct = if (s.hasFiveHour) s.fiveHourUtil.roundToInt() else null,
             fiveHourResets = TimeFmt.resetsIn(s.fiveHourReset, now),
             sevenDayPct = s.sevenDayUtil.coerceAtLeast(0f).roundToInt(),
             sevenDayResets = TimeFmt.resetsIn(s.sevenDayReset, now),

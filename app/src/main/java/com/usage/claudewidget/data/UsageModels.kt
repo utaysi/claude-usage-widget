@@ -10,7 +10,7 @@ data class Window(
 
 /** Parsed snapshot of the /usage endpoint. */
 data class UsageSnapshot(
-    val fiveHour: Window,
+    val fiveHour: Window?,       // null on plans without a 5-hour limit (API sends `"five_hour": null`)
     val sevenDay: Window,
     val fetchedAtEpochMs: Long,
 ) {
@@ -18,7 +18,7 @@ data class UsageSnapshot(
         fun parse(body: String, now: Long): UsageSnapshot {
             val root = JSONObject(body)
             return UsageSnapshot(
-                fiveHour = root.getJSONObject("five_hour").toWindow(),
+                fiveHour = root.optJSONObject("five_hour")?.toWindow(),
                 sevenDay = root.getJSONObject("seven_day").toWindow(),
                 fetchedAtEpochMs = now,
             )
